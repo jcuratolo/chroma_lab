@@ -1,0 +1,65 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+    
+      google.load("visualization", "1", {packages:["corechart"]});
+    google.setOnLoadCallback(initStuff);
+    
+    function initStuff() {
+      var info = [];
+      //evolve();
+      drawChart(info);
+      document.getElementById("final").innerHTML = "Final generation: "+GEN_COUNT;
+    }
+
+    function drawChart(info) {
+      var data = new google.visualization.DataTable();
+      data.addColumn('number', 'x');
+      data.addColumn('number', 'Best Fitness');
+      data.addColumn('number', 'Elite Clones Made');
+      //data.addColumn({ id: 'i0', label: 'CLONE_RECORD', type: 'number', role:'data'});
+      data.addColumn({ id: 'i1', label: 'Single Gene Mutations',type: 'number', role: 'data' });
+      //data.addColumn('number', 'CLONE_RECORD');
+      //data.addColumn('number', 'MUTATION_RECORD');
+      //data.addColumn({id:'i0', type:'number', role:'interval'});
+
+  	  for ( var i = 0; i < SCORE_RECORD.length; i++ ) 
+  	  {
+  	  	info[ i ] = ( [ i, SCORE_RECORD[ i ], CLONE_RECORD[ i ], MUTATION_RECORD[ i ] ] );
+  	  }
+      data.addRows(info);
+      var options_lines = {
+          title: 'Best fitness of each generation (lower is better)',
+          hAxis: { viewWindowMode: 'pretty' },
+          curveType: 'function',
+          //lineWidth: 3,
+          intervals: { 'style':'line' },
+          /*
+          series: {
+            'i0': { color: '#D9544C', lineWidth: 10 }
+          },*/
+          
+          series: [
+            { 'style': 'line', 'color': '#D3362D', 'lineWidth': 3 },
+            { 'style': 'line', 'color': '#F1CA3A', 'lineWidth': 1 },
+            { 'style': 'line', 'color': '#5F9654', 'lineWidth': 1 },
+          ],
+          legend: 'none',
+      };
+
+
+     //document.getElementById('chart_div').setAttribute("style", "width:"+SCORE_RECORD.length+"px");
+     //document.getElementById('chart_div').setAttribute("style", "height:500px");
+      var chart_lines = new google.visualization.LineChart(document.getElementById('chart_div'));
+      chart_lines.draw(data, options_lines);
+  }
+  </script>
+  </head>
+  <body>
+    <div id="chart_div" style="width: 100%;height: 500;"></div>
+    <h2 id="final"></h2>
+    <ul  id="candidates"></ul>
+  </body>
+  <script src = "ga.js"></script>
+</html>

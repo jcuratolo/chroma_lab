@@ -2,68 +2,55 @@
 <head>
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="custom.css">
-  <style>
-  li:hover {
-    font-weight: bold;
-  }
-  </style>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body class="container">
-
-
-  <!-- Docs master nav -->
-    <header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
+<body>
   <div class="container">
-    <div class="navbar-header">
-      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a href="../" class="navbar-brand">Chroma Lab</a>
-    </div>
-    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-      <ul class="nav navbar-nav">
-        <li>
-          <a href="../getting-started/">About</a>
-        </li>
-        <li>
-          <a href="../css/">CSS</a>
-        </li>
-        <li>
-          <a href="../components/">Components</a>
-        </li>
-        <li>
-          <a href="../javascript/">JavaScript</a>
-        </li>
-        <li>
-          <a href="../customize/">Customize</a>
-        </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="http://expo.getbootstrap.com" onclick="ga('send', 'event', 'Navbar', 'Community links', 'Expo');">Expo</a></li>
-        <li><a href="http://blog.getbootstrap.com" onclick="ga('send', 'event', 'Navbar', 'Community links', 'Blog');">Blog</a></li>
-      </ul>
-    </nav>
+ 
+
+ <!-- nav -->
+ <div class="navbar-header">
+   <div class="navbar navbar-static-top" id="top" role="banner">
+    <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
   </div>
+  <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+    <a href="../" class="navbar-brand">Chroma Farm</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../getting-started/">Getting started</a>
+      </li>
+      <li>
+        <a href="../about/">About</a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li>
+        <a href="../customize/">Customize</a>
+      </li>
+    </ul>
+  </nav>
+
 
 
   <div class="row">
-    <div id="0" class="col-xs-4 " onclick="improveFitness(pop[0])">
+    <div id="0" class="col-xs-4 box " onclick="improveFitness(pop[0])">
       <h1>SPQR</h1>
       <p class="">
         Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
       </p>
     </div>
-    <div id="1" class="col-xs-4 " onclick="improveFitness(pop[1])">
+    <div id="1" class="col-xs-4 box" onclick="improveFitness(pop[1])">
       <h1>SPQR</h1>
       <p class="">
         Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
       </p>
     </div>
-    <div id="2" class="col-xs-4 " onclick="improveFitness(pop[2])">
+    <div id="2" class="col-xs-4 box" onclick="improveFitness(pop[2])">
       <h1>SPQR</h1>
       <p class="">
         Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
@@ -73,19 +60,19 @@
 
 
   <div class="row">
-    <div id="3" class="col-xs-4 " onclick="improveFitness(pop[3])">
+    <div id="3" class="col-xs-4 box" onclick="improveFitness(pop[3])">
       <h1>SPQR</h1>
       <p class="">
         Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
       </p>
     </div>
-    <div id="4" class="col-xs-4 " onclick="improveFitness(pop[4])">
+    <div id="4" class="col-xs-4 box" onclick="improveFitness(pop[4])">
       <h1>SPQR</h1>
       <p class="">
         Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
       </p>
     </div>
-    <div id="5" class="col-xs-4 " onclick="improveFitness(pop[5])">
+    <div id="5" class="col-xs-4 box" onclick="improveFitness(pop[5])">
       <h1>SPQR</h1>
       <p class="">
         Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
@@ -95,25 +82,26 @@
 
 
   <div class="row">
-    <div id="6" class="col-xs-4 " onclick="improveFitness(pop[6])">
+    <div id="6" class="col-xs-4 box" onclick="improveFitness(pop[6])">
       <h1>SPQR</h1>
       <p class="">
         Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
       </p>
     </div>
-    <div id="7" class="col-xs-4 " onclick="improveFitness(pop[7])">
+    <div id="7" class="col-xs-4 box" onclick="improveFitness(pop[7])">
       <h1>SPQR</h1>
       <p class="">
         Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
       </p>
     </div>
-    <div id="8" class="col-xs-4 " onclick="improveFitness(pop[8])">
+    <div id="8" class="col-xs-4 box" onclick="improveFitness(pop[8])">
       <h1>SPQR</h1>
       <p class="">
         Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
       </p>
     </div>
   </div>
+</div>
   <footer>
     <div class="col-xs-4"><h4>Settings</h4</div>
     <div class="col-xs-8"></div>

@@ -4,7 +4,7 @@ var GEN_COUNT = 0; // begin generation counter at 0
 var GENE_COUNT = 9; // how many genes each indiv has
 var GOAL = {};
 var MAX_CHANCE_DEATHS = 10; // randomly killed off each generation
-var MUTATE_CHANCE = .25 // Math.random() must be < to mutate
+var MUTATE_CHANCE = .35 // Math.random() must be < to mutate
 var MAX_GENS = 5000; // To cap off each run
 var ELITE_COUNT = 1 // How many best-ranked indivs to potentially clone
 var ELITE_CLONE_CHANCE = 1; // Chance of fittest indivs cloning to next gen
@@ -63,6 +63,7 @@ function getText( paramCurrentIndiv )
 
 function improveFitness( paramCurrentIndiv )
 {
+  // reset all fitnessScores
   paramCurrentIndiv.fitnessScore = 0;
   console.log( "improved fitness!" );
   evolve();
@@ -96,7 +97,6 @@ function initPop( paramCurrentGen )
     //paramCurrentGen[ii].genes[4] = 9;
   } // end for loop for initial generation
   GOAL = paramCurrentGen[ 0 ]; // just to have something to begin with
-  console.log( paramCurrentGen );
 } // End intiPop()
 
 
@@ -123,7 +123,7 @@ function calcFitness( paramCurrentGen )
     for ( var j = 0; j < paramCurrentGen[ i ].genes.length; j++ )
     {
       // calculate fitness
-      var temp = Math.abs( GOAL.genes[ j ] - paramCurrentGen[ i ].genes[ j ] );
+      var temp = Math.pow( GOAL.genes[ j ] - paramCurrentGen[ i ].genes[ j ], 2 );
       paramCurrentGen[ i ].fitness[ j ] = temp;
       // sum fitness of all genes
       total = total + paramCurrentGen[ i ].fitness[ j ];
@@ -143,6 +143,7 @@ function sortGenByFitness( paramCurrentGen )
   {
     return a.fitnessScore - b.fitnessScore;
   } );
+  GOAL = paramCurrentGen[ 0 ];
 }
 
 
@@ -196,6 +197,8 @@ function mate( paramCurrentGen, paramNextGen )
     mutate( child );
     paramNextGen.push( child ); // add child to next generation
     sortGenByFitness( paramNextGen );
+    console.log( paramNextGen );
+    calcFitness( paramNextGen );
   } // end for each indiv mating loop 
 }
 

@@ -6,3 +6,10 @@ body {
 .color_scheme {
 	background: #666
 }
+
+.box:hover {
+	-webkit-box-shadow: 0px 0px 50px 0px rgba(0,0,0,.5);
+	-moz-box-shadow: 0px 0px 50px 0px rgba(0,0,0,.5);
+	box-shadow: 0px 0px 50px 0px rgba(0,0,0,.5);
+	z-index: 1000;
+}

@@ -1,65 +1,131 @@
 <html>
-  <head>
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-    
-      google.load("visualization", "1", {packages:["corechart"]});
-    google.setOnLoadCallback(initStuff);
-    
-    function initStuff() {
-      var info = [];
-      //evolve();
-      drawChart(info);
-      document.getElementById("final").innerHTML = "Final generation: "+GEN_COUNT;
-    }
-
-    function drawChart(info) {
-      var data = new google.visualization.DataTable();
-      data.addColumn('number', 'x');
-      data.addColumn('number', 'Best Fitness');
-      data.addColumn('number', 'Elite Clones Made');
-      //data.addColumn({ id: 'i0', label: 'CLONE_RECORD', type: 'number', role:'data'});
-      data.addColumn({ id: 'i1', label: 'Single Gene Mutations',type: 'number', role: 'data' });
-      //data.addColumn('number', 'CLONE_RECORD');
-      //data.addColumn('number', 'MUTATION_RECORD');
-      //data.addColumn({id:'i0', type:'number', role:'interval'});
-
-  	  for ( var i = 0; i < SCORE_RECORD.length; i++ ) 
-  	  {
-  	  	info[ i ] = ( [ i, SCORE_RECORD[ i ], CLONE_RECORD[ i ], MUTATION_RECORD[ i ] ] );
-  	  }
-      data.addRows(info);
-      var options_lines = {
-          title: 'Best fitness of each generation (lower is better)',
-          hAxis: { viewWindowMode: 'pretty' },
-          curveType: 'function',
-          //lineWidth: 3,
-          intervals: { 'style':'line' },
-          /*
-          series: {
-            'i0': { color: '#D9544C', lineWidth: 10 }
-          },*/
-          
-          series: [
-            { 'style': 'line', 'color': '#D3362D', 'lineWidth': 3 },
-            { 'style': 'line', 'color': '#F1CA3A', 'lineWidth': 1 },
-            { 'style': 'line', 'color': '#5F9654', 'lineWidth': 1 },
-          ],
-          legend: 'none',
-      };
-
-
-     //document.getElementById('chart_div').setAttribute("style", "width:"+SCORE_RECORD.length+"px");
-     //document.getElementById('chart_div').setAttribute("style", "height:500px");
-      var chart_lines = new google.visualization.LineChart(document.getElementById('chart_div'));
-      chart_lines.draw(data, options_lines);
+<head>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="custom.css">
+  <style>
+  li:hover {
+    font-weight: bold;
   }
-  </script>
-  </head>
-  <body>
-    <div id="chart_div" style="width: 100%;height: 500;"></div>
-    <h2 id="final"></h2>
-    <code><ul  id="candidates"></ul></code>
-  </body>
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body class="container">
+
+
+  <!-- Docs master nav -->
+    <header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="../" class="navbar-brand">Chroma Lab</a>
+    </div>
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="../getting-started/">About</a>
+        </li>
+        <li>
+          <a href="../css/">CSS</a>
+        </li>
+        <li>
+          <a href="../components/">Components</a>
+        </li>
+        <li>
+          <a href="../javascript/">JavaScript</a>
+        </li>
+        <li>
+          <a href="../customize/">Customize</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="http://expo.getbootstrap.com" onclick="ga('send', 'event', 'Navbar', 'Community links', 'Expo');">Expo</a></li>
+        <li><a href="http://blog.getbootstrap.com" onclick="ga('send', 'event', 'Navbar', 'Community links', 'Blog');">Blog</a></li>
+      </ul>
+    </nav>
+  </div>
+
+
+  <div class="row">
+    <div id="0" class="col-xs-4 " onclick="improveFitness(pop[0])">
+      <h1>SPQR</h1>
+      <p class="">
+        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+      </p>
+    </div>
+    <div id="1" class="col-xs-4 " onclick="improveFitness(pop[1])">
+      <h1>SPQR</h1>
+      <p class="">
+        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+      </p>
+    </div>
+    <div id="2" class="col-xs-4 " onclick="improveFitness(pop[2])">
+      <h1>SPQR</h1>
+      <p class="">
+        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+      </p>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div id="3" class="col-xs-4 " onclick="improveFitness(pop[3])">
+      <h1>SPQR</h1>
+      <p class="">
+        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+      </p>
+    </div>
+    <div id="4" class="col-xs-4 " onclick="improveFitness(pop[4])">
+      <h1>SPQR</h1>
+      <p class="">
+        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+      </p>
+    </div>
+    <div id="5" class="col-xs-4 " onclick="improveFitness(pop[5])">
+      <h1>SPQR</h1>
+      <p class="">
+        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+      </p>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div id="6" class="col-xs-4 " onclick="improveFitness(pop[6])">
+      <h1>SPQR</h1>
+      <p class="">
+        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+      </p>
+    </div>
+    <div id="7" class="col-xs-4 " onclick="improveFitness(pop[7])">
+      <h1>SPQR</h1>
+      <p class="">
+        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+      </p>
+    </div>
+    <div id="8" class="col-xs-4 " onclick="improveFitness(pop[8])">
+      <h1>SPQR</h1>
+      <p class="">
+        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+      </p>
+    </div>
+  </div>
+  <footer>
+    <div class="col-xs-4"><h4>Settings</h4</div>
+    <div class="col-xs-8"></div>
+  </footer>
+  <script src="js/jquery-1.11.1.js"></script>
+  <script src="js/bootstrap.min.js"></script>
   <script src = "ga.js"></script>
+  <script>
+  $(function() {
+
+
+  });
+  </script>
+</body>
 </html>

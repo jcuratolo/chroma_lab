@@ -3,8 +3,7 @@ var GEN_POP = 9; // size of each generation's population
 var GEN_COUNT = 0; // begin generation counter at 0
 var GENE_COUNT = 9; // how many genes each indiv has
 var GOAL = {};
-var MAX_CHANCE_DEATHS = 10; // randomly killed off each generation
-var MUTATE_CHANCE = .35 // Math.random() must be < to mutate
+var MUTATE_CHANCE = .75 // Math.random() must be < to mutate
 var MAX_GENS = 5000; // To cap off each run
 var ELITE_COUNT = 1 // How many best-ranked indivs to potentially clone
 var ELITE_CLONE_CHANCE = 1; // Chance of fittest indivs cloning to next gen
@@ -63,7 +62,6 @@ function getText( paramCurrentIndiv )
 
 function improveFitness( paramCurrentIndiv )
 {
-  // reset all fitnessScores
   paramCurrentIndiv.fitnessScore = 0;
   console.log( "improved fitness!" );
   evolve();
@@ -99,18 +97,6 @@ function initPop( paramCurrentGen )
   GOAL = paramCurrentGen[ 0 ]; // just to have something to begin with
 } // End intiPop()
 
-
-// Not currently used
-function randomSmite( currentGenParam )
-{
-  var generationArray = currentGenParam;
-  // Randomly kill off some of the population. Shit happens.
-  for ( var i = 0; i < MAX_CHANCE_DEATHS; i++ )
-  {
-    // I smite thee
-    generationArray[ Math.random() * generationArray.length ].pop();
-  }
-}
 
 function calcFitness( paramCurrentGen )
 {
@@ -179,6 +165,7 @@ function mate( paramCurrentGen, paramNextGen )
   {
     // first parent is from the loop iterators position
     // second parent is randomly selected from the population
+    // child is produced by averaging between the two
     var child = {
       genes: [],
       fitness: [],
@@ -187,18 +174,21 @@ function mate( paramCurrentGen, paramNextGen )
     var firstParent = paramCurrentGen[ jj ];
     var secondParent = paramCurrentGen[ Math.floor( Math.random() *
       paramCurrentGen.length ) ];
-    var splitPoint = // The crossover position in genes array
-      Math.floor( Math.random() *
-        firstParent.genes.length );
-    // Child gets genes from before splitPoint on firstParent
-    // and after splitPoint on secondParent
-    child.genes = firstParent.genes.slice( 0, splitPoint )
-      .concat( secondParent.genes.slice( splitPoint ) );
+    var firstParentWeight = Math.random();
+
+    // for each gene of each individual
+    for ( var k = 0; k < paramCurrentGen[ jj ].genes.length; k++ )
+    {
+      // Child's gene is the arithmetic mean of the two parents
+      //child.genes[ k ] = Math.floor( firstParentWeight * firstParent.genes[ k ] + ( 1 - firstParentWeight ) * secondParent.genes[ k ] / 2 );
+      child.genes[ k ] = Math.floor( ( firstParent.genes[ k ] + secondParent.genes[ k ] ) / 2 );
+    }
     mutate( child );
-    paramNextGen.push( child ); // add child to next generation
+    // add child to next generation 
+    paramNextGen.push( child );
     sortGenByFitness( paramNextGen );
-    console.log( paramNextGen );
     calcFitness( paramNextGen );
+    console.log( paramNextGen );
   } // end for each indiv mating loop 
 }
 
@@ -238,6 +228,8 @@ function isGoalReached( paramCurrentGen )
 
 // Accepts an object individual and 
 // decides to mutate based on chance
+// Proposed mutation classes:
+//    
 function mutate( paramCurrentIndiv )
 {
   // Mutation is by chance set at the top

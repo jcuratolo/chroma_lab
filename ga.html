@@ -6,102 +6,103 @@
 </head>
 <body>
   <div class="container">
- 
+   
 
- <!-- nav -->
- <div class="navbar-header">
-   <div class="navbar navbar-static-top" id="top" role="banner">
-    <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
-      <span class="sr-only">Toggle navigation</span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
+   <!-- nav -->
+   <div class="navbar navbar-static-top" id="top" role="navigation">
+     <div class="navbar-header">
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="glyphicon glyphicon-align-justify"></span>
+      </button>
+      <a href="../" class="navbar-brand">Chroma Farm</a>
+    </div>
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="../getting-started/">Getting started</a>
+        </li>
+        <li>
+          <a href="../about/">About</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a class="glyphicon glyphicon-repeat" href="" onclick="initPop(pop)"></a>
+        </li>
+        <li>
+          <a class="glyphicon glyphicon-cog" href="../customize/"></a>
+        </li>
+      </ul>
+    </nav>
+
+
+
+    <div class="row">
+      <div id="0" class="col-xs-4 box " onclick="improveFitness(pop[0])">
+        <h1>SPQR</h1>
+        <p class="">
+          Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+        </p>
+      </div>
+      <div id="1" class="col-xs-4 box" onclick="improveFitness(pop[1])">
+        <h1>SPQR</h1>
+        <p class="">
+          Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+        </p>
+      </div>
+      <div id="2" class="col-xs-4 box" onclick="improveFitness(pop[2])">
+        <h1>SPQR</h1>
+        <p class="">
+          Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+        </p>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div id="3" class="col-xs-4 box" onclick="improveFitness(pop[3])">
+        <h1>SPQR</h1>
+        <p class="">
+          Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+        </p>
+      </div>
+      <div id="4" class="col-xs-4 box" onclick="improveFitness(pop[4])">
+        <h1>SPQR</h1>
+        <p class="">
+          Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+        </p>
+      </div>
+      <div id="5" class="col-xs-4 box" onclick="improveFitness(pop[5])">
+        <h1>SPQR</h1>
+        <p class="">
+          Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+        </p>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div id="6" class="col-xs-4 box" onclick="improveFitness(pop[6])">
+        <h1>SPQR</h1>
+        <p class="">
+          Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+        </p>
+      </div>
+      <div id="7" class="col-xs-4 box" onclick="improveFitness(pop[7])">
+        <h1>SPQR</h1>
+        <p class="">
+          Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+        </p>
+      </div>
+      <div id="8" class="col-xs-4 box" onclick="improveFitness(pop[8])">
+        <h1>SPQR</h1>
+        <p class="">
+          Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+        </p>
+      </div>
+    </div>
   </div>
-  <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-    <a href="../" class="navbar-brand">Chroma Farm</a>
-    <ul class="nav navbar-nav">
-      <li>
-        <a href="../getting-started/">Getting started</a>
-      </li>
-      <li>
-        <a href="../about/">About</a>
-      </li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li>
-        <a href="../customize/">Customize</a>
-      </li>
-    </ul>
-  </nav>
-
-
-
-  <div class="row">
-    <div id="0" class="col-xs-4 box " onclick="improveFitness(pop[0])">
-      <h1>SPQR</h1>
-      <p class="">
-        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-      </p>
-    </div>
-    <div id="1" class="col-xs-4 box" onclick="improveFitness(pop[1])">
-      <h1>SPQR</h1>
-      <p class="">
-        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-      </p>
-    </div>
-    <div id="2" class="col-xs-4 box" onclick="improveFitness(pop[2])">
-      <h1>SPQR</h1>
-      <p class="">
-        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-      </p>
-    </div>
-  </div>
-
-
-  <div class="row">
-    <div id="3" class="col-xs-4 box" onclick="improveFitness(pop[3])">
-      <h1>SPQR</h1>
-      <p class="">
-        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-      </p>
-    </div>
-    <div id="4" class="col-xs-4 box" onclick="improveFitness(pop[4])">
-      <h1>SPQR</h1>
-      <p class="">
-        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-      </p>
-    </div>
-    <div id="5" class="col-xs-4 box" onclick="improveFitness(pop[5])">
-      <h1>SPQR</h1>
-      <p class="">
-        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-      </p>
-    </div>
-  </div>
-
-
-  <div class="row">
-    <div id="6" class="col-xs-4 box" onclick="improveFitness(pop[6])">
-      <h1>SPQR</h1>
-      <p class="">
-        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-      </p>
-    </div>
-    <div id="7" class="col-xs-4 box" onclick="improveFitness(pop[7])">
-      <h1>SPQR</h1>
-      <p class="">
-        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-      </p>
-    </div>
-    <div id="8" class="col-xs-4 box" onclick="improveFitness(pop[8])">
-      <h1>SPQR</h1>
-      <p class="">
-        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-      </p>
-    </div>
-  </div>
-</div>
   <footer>
     <div class="col-xs-4"><h4>Settings</h4</div>
     <div class="col-xs-8"></div>

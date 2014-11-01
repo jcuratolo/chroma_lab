@@ -3,7 +3,7 @@ var GEN_POP = 9; // size of each generation's population
 var GEN_COUNT = 0; // begin generation counter at 0
 var GENE_COUNT = 9; // how many genes each indiv has
 var GOAL = {};
-var MUTATE_CHANCE = .75 // Math.random() must be < to mutate
+var MUTATE_CHANCE = 1 // Math.random() must be < to mutate
 var MAX_GENS = 5000; // To cap off each run
 var ELITE_COUNT = 1 // How many best-ranked indivs to potentially clone
 var ELITE_CLONE_CHANCE = 1; // Chance of fittest indivs cloning to next gen
@@ -229,7 +229,10 @@ function isGoalReached( paramCurrentGen )
 // Accepts an object individual and 
 // decides to mutate based on chance
 // Proposed mutation classes:
-//    
+//    cosmic ray
+//    inversion
+//    darken 50%
+//    lighten 50%
 function mutate( paramCurrentIndiv )
 {
   // Mutation is by chance set at the top

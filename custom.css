@@ -17,3 +17,9 @@ body {
 	transition: all .25s ease-out;
 	z-index: 1000;
 }
+
+.elite_css {
+	background: black;
+	padding: 25px;
+	//width: 100%;
+}

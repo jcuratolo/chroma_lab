@@ -3,7 +3,7 @@ var GEN_POP = 9; // size of each generation's population
 var GEN_COUNT = 0; // begin generation counter at 0
 var GENE_COUNT = 9; // how many genes each indiv has
 var GOAL = {};
-var MUTATE_CHANCE = 1 // Math.random() must be < to mutate
+var MUTATE_CHANCE = .5 // Math.random() must be < to mutate
 var MAX_GENS = 5000; // To cap off each run
 var ELITE_COUNT = 1 // How many best-ranked indivs to potentially clone
 var ELITE_CLONE_CHANCE = 1; // Chance of fittest indivs cloning to next gen
@@ -24,7 +24,6 @@ function evolve()
 {
   pop = iterateGenerations( pop );
   writeGen( pop );
-  console.log( GOAL.genes );
 }
 
 
@@ -35,13 +34,25 @@ function writeGen( paramCurrentGen )
   {
     document.getElementById( i ).style.background = getBG( paramCurrentGen[ i ] );
     document.getElementById( i ).childNodes[ 1 ].style.color = getTitle( paramCurrentGen[ i ] );
-    document.getElementById( i ).childNodes[ 3 ].style.color = getText( paramCurrentGen[ i ] )
-    /*var fitnessScore = document.createElement( 'div' );
-    fitnessScore.innerHTML = paramCurrentGen[ i ].fitnessScore;
-    fitnessScore.style.background = "black";
-    fitnessScore.style.color = "white";
-    document.getElementById( i ).appendChild( fitnessScore );*/
+    document.getElementById( i ).childNodes[ 3 ].style.color = getText( paramCurrentGen[ i ] );
+
+
   }
+
+  // output elite swatch
+  var eliteSample = document.getElementsByClassName( "elite" )[ 0 ];
+  eliteSample.style.background = getBG( paramCurrentGen[ 0 ] );
+  eliteSample.childNodes[ 1 ].style.color = getTitle( paramCurrentGen[ 0 ] );
+  eliteSample.childNodes[ 3 ].style.color = getText( paramCurrentGen[ 0 ] );
+
+  var eliteCSSReadout = document.getElementsByClassName( "elite_css_readout" )[ 0 ];
+  eliteCSSReadout.innerHTML = "background: " + getBG( paramCurrentGen[ 0 ] ) + ";";
+  eliteCSSReadout.innerHTML += "</br>";
+  eliteCSSReadout.innerHTML += "h1 { color: " + getTitle( paramCurrentGen[ 0 ] ) + "; }";
+  eliteCSSReadout.innerHTML += "</br>";
+  eliteCSSReadout.innerHTML += "p { color: " + getText( paramCurrentGen[ 0 ] ) + "; }";
+  eliteCSSReadout.style.background = "black";
+
 }
 
 
@@ -62,8 +73,9 @@ function getText( paramCurrentIndiv )
 
 function improveFitness( paramCurrentIndiv )
 {
-  paramCurrentIndiv.fitnessScore = 0;
-  console.log( "improved fitness!" );
+  //paramCurrentIndiv.fitnessScore = 0;
+  //console.log( "improved fitness!" );
+  GOAL = paramCurrentIndiv;
   evolve();
 }
 
@@ -105,19 +117,49 @@ function calcFitness( paramCurrentGen )
   // for each individual in this generation
   for ( var i = 0; i < paramCurrentGen.length; i++ )
   {
+    paramCurrentGen[ i ].fitnessScore = cosineSimilarity( paramCurrentGen[ i ].genes, GOAL.genes )
+    console.log( i, " ", paramCurrentGen[ i ].fitnessScore );
     // for each gene
-    for ( var j = 0; j < paramCurrentGen[ i ].genes.length; j++ )
-    {
-      // calculate fitness
-      var temp = Math.pow( GOAL.genes[ j ] - paramCurrentGen[ i ].genes[ j ], 2 );
-      paramCurrentGen[ i ].fitness[ j ] = temp;
-      // sum fitness of all genes
-      total = total + paramCurrentGen[ i ].fitness[ j ];
-    }
-    // set fitnessScore from total
-    paramCurrentGen[ i ].fitnessScore = total + 1;
-    total = 0; // reset total
+    // for ( var j = 0; j < paramCurrentGen[ i ].genes.length; j++ )
+    // {
+    //   // calculate fitness
+    //   var temp = Math.abs( GOAL.genes[ j ] - paramCurrentGen[ i ].genes[ j ] );
+    //   paramCurrentGen[ i ].fitness[ j ] = temp;
+    //   // sum fitness of all genes
+    //   total = total + paramCurrentGen[ i ].fitness[ j ];
+    // }
+    // // set fitnessScore from total
+    // paramCurrentGen[ i ].fitnessScore = total + 1;
+    // total = 0; // reset total
   } // end for each indiv
+}
+
+
+function dotProduct( vecA, vecB )
+{
+  var product = 0;
+  for ( var i = 0; i < vecA.length; i++ )
+  {
+    product += vecA[ i ] * vecB[ i ];
+  }
+  return product;
+}
+
+
+function magnitude( vec )
+{
+  var sum = 0;
+  for ( var i = 0; i < vec.length; i++ )
+  {
+    sum += vec[ i ] * vec[ i ];
+  }
+  return Math.sqrt( sum );
+}
+
+
+function cosineSimilarity( vecA, vecB )
+{
+  return dotProduct( vecA, vecB ) / ( magnitude( vecA ) * magnitude( vecB ) );
 }
 
 
@@ -127,9 +169,8 @@ function sortGenByFitness( paramCurrentGen )
 {
   paramCurrentGen.sort( function( a, b )
   {
-    return a.fitnessScore - b.fitnessScore;
+    return b.fitnessScore - a.fitnessScore;
   } );
-  GOAL = paramCurrentGen[ 0 ];
 }
 
 
@@ -188,7 +229,7 @@ function mate( paramCurrentGen, paramNextGen )
     paramNextGen.push( child );
     sortGenByFitness( paramNextGen );
     calcFitness( paramNextGen );
-    console.log( paramNextGen );
+    //console.log( paramNextGen );
   } // end for each indiv mating loop 
 }
 
@@ -197,11 +238,17 @@ function iterateGenerations( paramCurrentGen )
 {
   var nextGen = [];
 
-  sortGenByFitness( paramCurrentGen );
+  //updateRecords( paramCurrentGen );
+  // Calc and sort to find out who elites are in light of
+  // the user's new selection
   calcFitness( paramCurrentGen );
-  updateRecords( paramCurrentGen );
+  sortGenByFitness( paramCurrentGen );
   cloneElitesToNextGen( paramCurrentGen, nextGen );
+  //creat children to fill the next generation
   mate( paramCurrentGen, nextGen );
+  // sort by fitness for display
+  calcFitness( nextGen );
+  sortGenByFitness( nextGen );
 
   return nextGen;
 } // end iterateGeneration

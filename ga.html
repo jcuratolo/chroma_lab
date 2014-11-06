@@ -18,24 +18,35 @@
         <span class="sr-only">Toggle navigation</span>
         <span class="glyphicon glyphicon-align-justify"></span>
       </button>
-      <a href="../" class="navbar-brand">Chroma Lab</a>
+      <a href="https://github.com/jcuratolo/chroma_lab" class="navbar-brand">Chroma Lab</a>
     </div>
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">
         <li>
           <a data-toggle="modal" href="#gettingStartedModal" >Getting started</a>
         </li>
-        <li>
-          <a data-toggle="modal" href="#aboutModal" >About</a>
-        </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <a class="glyphicon glyphicon-repeat" href="" onclick="initPop(pop)"></a>
+          <a onclick="chromaLab.reset()"><span  class="glyphicon glyphicon-repeat"></span></a>
         </li>
-        <li>
-          <a class="glyphicon glyphicon-cog" href="../customize/"></a>
-        </li>
+
+        <!-- DROPDOWN -->
+        <li class="dropdown">
+          <a class="glyphicon glyphicon-cog dropdown-toggle" href="#" data-toggle="dropdown"><span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li >              
+                <a onclick="chromaLab.setMode('arithmeticMean')">Use Arithmetic Mean</a>
+            </li>
+            <li>
+              <a onclick="chromaLab.setMode('geometricMean')">Use Geometric Mean</a>
+            </li>
+            <li>
+              <a onclick="chromaLab.setMode('quadraticMean')">Use Quadratic Mean</a>
+            </li>          
+          </ul>
+        </li> <!-- END DROPDOWN -->
+
       </ul>
     </nav>
 
@@ -51,129 +62,157 @@
             <h4 class="modal-title" id="gettingStartedModalLabel">Getting Started</h4>
           </div>
           <div class="modal-body">
-            Chroma Lab is a tool designed to augment your ability to explore and discover color schemes with help from a genetic algorithm. Select the swatch that most appeals to you to begin the process. Swatches are ranked top to bottom and left to right based on their similarity to your last choice. The result is that the top left corner is most similar to your choice and the bottom right corner is the least similar, with respect to distance in RGB color space.</br></br>Once you steer close to how you want your colors, try selecting the same swatch for several generations to saturate the population with its genes and see more specific variations before finalizing your choice.
-          </div>
-          <div class="modal-footer">  
-            <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    <!-- ABOUT MODAL -->
-    <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="aboutModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title" id="aboutModalLabel">About Chroma Lab</h4>
-          </div>
-          <div class="modal-body">
-            Chroma Lab uses a genetic algorithm to generate potential color schemes by interpolating between the two parents' colors. The human provides the algorithm's fitness function by selecting a single color scheme as the best of each generation.</br></br>Designers must navigate a problem space by means of an iterative ideation process along with their design-sensibility heuristic. My hope is that a tool like this can assist with exploring the problem space for a design solution by allowing humans and computers to contribute their strengths to the process. As a result the designer can reallocate the saved effort towards designing to ultimately produce a more refined solution.
-          </div>
-          <div class="modal-footer">  
-            <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    <!-- END MODALS -->
-
-
-    <!-- SWATCHES -->
-    <div id="swatches">
-      <div class="row">
-        <div id="0" class="col-xs-4 box" onclick="improveFitness(pop[0])">
-          <h1>SPQR</h1>
-          <p class="">
-            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-          </p>
-        </div>
-        <div id="1" class="col-xs-4 box" onclick="improveFitness(pop[1])">
-          <h1>SPQR</h1>
-          <p class="">
-            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-          </p>
-        </div>
-        <div id="2" class="col-xs-4 box" onclick="improveFitness(pop[2])">
-          <h1>SPQR</h1>
-          <p class="">
-            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-          </p>
-        </div>
-      </div>
-
-
-      <div class="row">
-        <div id="3" class="col-xs-4 box" onclick="improveFitness(pop[3])">
-          <h1>SPQR</h1>
-          <p class="">
-            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-          </p>
-        </div>
-        <div id="4" class="col-xs-4 box" onclick="improveFitness(pop[4])">
-          <h1>SPQR</h1>
-          <p class="">
-            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-          </p>
-        </div>
-        <div id="5" class="col-xs-4 box" onclick="improveFitness(pop[5])">
-          <h1>SPQR</h1>
-          <p class="">
-            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-          </p>
-        </div>
-      </div>
-
-
-      <div class="row">
-        <div id="6" class="col-xs-4 box" onclick="improveFitness(pop[6])">
-          <h1>SPQR</h1>
-          <p class="">
-            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-          </p>
-        </div>
-        <div id="7" class="col-xs-4 box" onclick="improveFitness(pop[7])">
-          <h1>SPQR</h1>
-          <p class="">
-            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-          </p>
-        </div>
-        <div id="8" class="col-xs-4 box" onclick="improveFitness(pop[8])">
-          <h1>SPQR</h1>
-          <p class="">
-            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div> <!-- END SWATCHES --> <!-- end container -->
-
-          <h4>Previous Selection:</h4>
-        <div class="container row elite_css">
-            <div  class="col-xs-4 box elite">
-              <h1>SPQR</h1>
-              <p class="">
-                Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+            <p>
+              <strong>Chroma Lab</strong> is a tool designed to augment your ability to explore and discover aesthetically pleasing color schemes with help from a <a href="http://en.wikipedia.org/wiki/Genetic_algorithm">genetic algorithm</a>.
+            </p>
+            <p>
+              To begin the process select the swatch that most appeals to you. Every time you click, a new generation is born.
+              Swatches are ranked top to bottom and left to right based on their similarity to your last choice. The result is that the top left corner is most similar to your choice and the bottom right corner is the least similar, with respect to distance in RGB color space. A user's selections will have a cumulative effect on subsequent generations.  Once you steer close to how you want your colors, try selecting the same swatch for several generations to saturate the population with its genes and see more specific variations before finalizing your choice.
+            </p>
+            <p>
+              <strong>How does it work?</strong>
+              <ul>
+                <li>
+                  Chroma Lab uses a genetic algorithm to generate potential color schemes by interpolating between the two parents' colors.
+                </li>
+                <li>
+                  The human (that's you!) provides the algorithm's <a href="http://en.wikipedia.org/wiki/Fitness_function">fitness function</a> by selecting a single color scheme as the best of each generation. 
+                </li>
+                <li>                  
+                </li>
+              </ul>
+              <p>
+                Negotiating the problem space to arrive at a solution is a principle task in design that humans perform through an iterative ideation process guided by a design-sensibiity heuristic.  My hope is that a tool like this can assist with exploring the problem space for a design solution by allowing humans and computers to contribute their strengths to the process. As a result the designer can reallocate the saved effort towards designing and ultimately produce a more refined solution in the same amount of time.
               </p>
             </div>
-          <div  class="col-xs-4 elite_css_readout"></div>
+            <div class="modal-footer">  
+              <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+            </div>
+          </div>
         </div>
-      
+      </div>
 
 
-      <footer>
-      </footer>
-      <script src="js/jquery-1.11.1.js"></script>
-      <script src="js/bootstrap.min.js"></script>
-      <script src = "ga.js"></script>
-      <script>
-      $(function() {
+      <!-- END MODALS -->
 
 
-      });
-      </script>
-    </body>
-    </html>
+      <!-- SWATCHES -->
+      <div class="">
+        <div id="0" class="col-xs-6 col-sm-3 box" onclick="chromaLab.improveFitness(chromaLab.pop()[0])">
+          <h1>SPQR</h1>
+          <p class="">
+            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+          </p>
+        </div>
+        <div id="1" class="col-xs-6 col-sm-3 box" onclick="chromaLab.improveFitness(chromaLab.pop()[1])">
+          <h1>SPQR</h1>
+          <p class="">
+            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+          </p>
+        </div>
+        <div id="2" class="col-xs-6 col-sm-3 box" onclick="chromaLab.improveFitness(chromaLab.pop()[2])">
+          <h1>SPQR</h1>
+          <p class="">
+            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+          </p>
+        </div>
+      </div>
+
+
+      <div class="">
+        <div id="3" class="col-xs-6 col-sm-3 box" onclick="chromaLab.improveFitness(chromaLab.pop()[3])">
+          <h1>SPQR</h1>
+          <p class="">
+            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+          </p>
+        </div>
+        <div id="4" class="col-xs-6 col-sm-3 box" onclick="chromaLab.improveFitness(chromaLab.pop()[4])">
+          <h1>SPQR</h1>
+          <p class="">
+            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+          </p>
+        </div>
+        <div id="5" class="col-xs-6 col-sm-3 box" onclick="chromaLab.improveFitness(chromaLab.pop()[5])">
+          <h1>SPQR</h1>
+          <p class="">
+            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+          </p>
+        </div>
+      </div>
+
+
+      <div class="">
+        <div id="6" class="col-xs-6 col-sm-3 box" onclick="chromaLab.improveFitness(chromaLab.pop()[6])">
+          <h1>SPQR</h1>
+          <p class="">
+            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+          </p>
+        </div>
+        <div id="7" class="col-xs-6 col-sm-3 box" onclick="chromaLab.improveFitness(chromaLab.pop()[7])">
+          <h1>SPQR</h1>
+          <p class="">
+            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+          </p>
+        </div>
+        <div id="8" class="col-xs-6 col-sm-3 box" onclick="chromaLab.improveFitness(chromaLab.pop()[8])">
+          <h1>SPQR</h1>
+          <p class="">
+            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+          </p>
+        </div>
+        <div id="9" class="col-xs-6 col-sm-3 box" onclick="chromaLab.improveFitness(chromaLab.pop()[9])">
+          <h1>SPQR</h1>
+          <p class="">
+            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+          </p>
+        </div>
+        <div id="10" class="col-xs-6 col-sm-3 box" onclick="chromaLab.improveFitness(chromaLab.pop()[10])">
+          <h1>SPQR</h1>
+          <p class="">
+            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+          </p>
+        </div>
+        <div id="11" class="col-xs-6 col-sm-3 box" onclick="chromaLab.improveFitness(chromaLab.pop()[11])">
+          <h1>SPQR</h1>
+          <p class="">
+            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+          </p>
+        </div>
+      </div>
+
+    </div><!-- end container -->
+
+
+
+
+    <footer>
+
+      <div class="container-fluid">
+
+        <h4>Previous Selection:</h4>
+        <div class="row elite_css">
+          <!-- ELITE SWATCH -->
+          <div  class="col-xs-6 col-sm-3 box elite">
+            <h1>SPQR</h1>
+            <p class="">
+              Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+            </p>
+          </div>
+          <!-- END ELITE SWATCH -->
+          <div  class="col-xs-6 col-sm-3 elite_css_readout"></div>
+        </div>
+
+      </div>  
+
+    </footer>
+    <script src="js/jquery-1.11.1.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src = "ga.js"></script>
+    <script>
+    $(function() {
+
+
+    });
+    </script>
+  </body>
+  </html>
